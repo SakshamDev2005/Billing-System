@@ -1,6 +1,3 @@
-# Billing-System
-
-
 # Cafe Billing System:
 
 This Python script uses the Tkinter library to create a simple GUI application for a cafe billing system. The system allows users to input the quantities of different cafe items, calculates the subtotal, and generates a bill entry.
