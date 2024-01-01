@@ -11,7 +11,7 @@ Python installed on your system.
 
 The necessary Python libraries (tkinter, pandas) installed.
 
-You can install them using the following command - pip install pandas
+You can install them using the following command - pip install module name
 
 
 # Getting Started:
