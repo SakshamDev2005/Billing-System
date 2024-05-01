@@ -1,55 +1,52 @@
-# Cafe Billing System:
+# Cafe Billing System
 
-This Python script uses the Tkinter library to create a simple GUI application for a cafe billing system. The system allows users to input the quantities of different cafe items, calculates the subtotal, and generates a bill entry.
+# Description
 
-
-# Perquisites:
-
-Before running the script, ensure that you have the following:
-
-Python installed on your system.
-
-The necessary Python libraries (tkinter, pandas) installed.
-
-You can install them using the following command - pip install module name
-
-
-# Getting Started:
-
-Clone the repository or download the script.
-
-Ensure that the required CSV files (Pricing.csv and Bill.csv) are present in the specified directory (Files).
-
+This Python application is a simple cafe billing system built using the tkinter library for the graphical user interface (GUI) and pandas for data handling. It allows users to select items from a menu, specify quantities, enter customer details, and generate bills.
 
 # Usage:
 
-Run the script using the following command: python cafe_billing_system.py
+Run the Python script cafe_billing_system.py.
 
-The GUI window will appear with labels for cafe items, entry fields for quantities, and a "Submit" button.
+Select items from the menu and specify quantities.
+
+Enter customer details (name and phone number).
+
+Click the "Submit" button to generate the bill and save the details to the database.
 
 
 # Features:
 
-1 - Cafe Items: The script displays cafe items (Cafe Latte, Cappuccino, Espresso) and their positions on the GUI.
+User-friendly interface with item selection buttons and quantity spinboxes.
 
-2 - Entry Fields: Users can enter the quantities of each cafe item in the provided entry fields.
+Validation for customer details entry (name and phone number).
 
-3 - Submit Button: Clicking the "Submit" button triggers the gen function, which calculates the subtotal based on the entered quantities and updates the bill CSV file.
+Calculation of subtotal, GST, and total amount.
 
-4 - Error Handling: If an error occurs during the process, an error message is displayed in red.
+Database storage of billing and customer details.
 
 
 # Files:
 
-1 - Pricing.csv: Contains the pricing information for cafe items.
+Items.csv: Contains the menu items and their corresponding prices.
 
-2 - Bill.csv: Stores the bill entries with date, subtotal, tax, and total.
+Bill.csv: Stores billing details such as date, subtotal, GST, and total amount.
 
+Customer-Details.csv: Stores customer details including name, phone number, and date of billing.
+
+
+# Requirements:
+
+Python 3.x
+
+tkinter
+
+pandas
 
 # Notes:
 
-1 -Make sure to have the required CSV files in the specified directory before running the script.
+Make sure to maintain the CSV file structure for proper functioning.
 
-2 -The script uses the Tkinter library for the graphical user interface and Pandas for data manipulation.
+Modify the CSV files to update the menu items or billing details as needed.
 
-3 - Feel free to customize the script according to your needs or enhance its features.
+
