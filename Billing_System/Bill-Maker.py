@@ -1,51 +1,171 @@
 import tkinter as tk
+from tkinter import messagebox
 import pandas as pd
-from datetime import date as da
-
-root = tk.Tk()
-root.geometry("600x500")
-
-x_val = 260
-
-qty1 , qty2 , qty3 = tk.IntVar() , tk.IntVar() , tk.IntVar()
-
-dictt1 = {1:['Cafe Latte',30,70] , 2: ['Cappuccino',30,140], 3: ['Espresso',30,210]}
-dot = da.today()
-pricing = pd.read_csv("Files/Pricing.csv")
-result = tk.Label(root , text = "" , fg = "black" , font = ("Arial",20)).place(x = 150  , y = 300 )
+from datetime import date as dt
 
 
-#Takes input and do the work of making bills
-def gen():
+class CafeBillingSystem:
+        
+    def __init__(self, master):
 
-    try:
-        want_1 , want_2 , want_3 = qty1.get() , qty2.get() , qty3.get()
-        sub_total = (want_1 * int(pricing.at[0,"Price"])) + (want_2 * int(pricing.at[1,"Price"])) + (want_3 * int(pricing.at[2,"Price"]))
-        df = pd.read_csv("Files/Bill.csv")
-        v = [dot , sub_total , .05 * sub_total , (sub_total + .05 * sub_total)]
-        df.loc[len(df)] = v
-        df.to_csv("Files/Bill.csv" , index = False)
-        result.config(text = "Entry is done in the Book")
-       
-    except:
-        result.config(text = "Error occured" , fg = "red")
+        df = pd.read_csv('Files/Items.csv')
+        file_range = len(df)
+        self.store = {}
+
+        self.master = master
+        self.master.title("Cafe Billing System")
+        self.master.geometry("1250x600")
+
+        label1 = tk.Label(master, text = "Cafe Billing System", font = ('Arial',30))
+        label1.pack(side = tk.TOP)
+
+        self.varname = tk.StringVar()
+        self.varphone = tk.StringVar()
+        
+
+        #labels 
+        for i in range(file_range):
+            name = df.at[i,'Items']
+            x_pos = df.at[i,'X']
+            y_pos = df.at[i,'Y']
+
+            label = tk.Label(master , text = name , fg = "black" , font = ("Arial" , 25) ).place( x = x_pos , y = y_pos )
 
 
-#Using loop for making Labels
-for i in dictt1:
-    name = 0
-    x_pos = 1
-    y_pos = 2
+        #self.spinbox   
+        self.spinbox1 = tk.Spinbox(master, to = 20)
+        self.spinbox1.place(x = 450 , y = 210)
 
-    label = tk.Label(root , text = dictt1[i][name] , fg = "black" , font = ("Arial" , 25) ).place(x = dictt1[i][x_pos] , y = dictt1[i][y_pos] )
+        self.spinbox2 = tk.Spinbox(master, to = 20)
+        self.spinbox2.place(x = 450 , y = 260)
+            
+        self.spinbox3 = tk.Spinbox(master, to = 20)
+        self.spinbox3.place(x = 450 , y = 310)
+            
+        self.spinbox4 = tk.Spinbox(master, to = 20)
+        self.spinbox4.place(x = 450 , y = 360)
+        
+
+        #buttons for items
+        btn1 = tk.Button(master, text = 'Send', command = lambda:self.Add(self.spinbox1.get(),'Cafe Latte'))
+        btn1.place(x = 620 , y = 205)
+
+        btn1 = tk.Button(master, text = 'Send', command = lambda:self.Add(self.spinbox2.get(),'Cappuccino'))
+        btn1.place(x = 620 , y = 255)
+
+        btn1 = tk.Button(master, text = 'Send', command = lambda:self.Add(self.spinbox3.get(),'Espresso'))
+        btn1.place(x = 620 , y = 305)
+
+        btn1 = tk.Button(master, text = 'Send', command = lambda:self.Add(self.spinbox4.get(),'Cold Coffee'))
+        btn1.place(x = 620 , y = 355)
 
 
-#Entries for taking Product Quantity  
-entries = tk.Entry(root , bg = "black" , fg = "white" , width = 20 , bd = 10 , textvariable = qty1 ).place(x = x_val , y = 75 )
-entries = tk.Entry(root , bg = "black" , fg = "white" , width = 20 , bd = 10 , textvariable = qty2).place(x = x_val , y = 145 )
-entries = tk.Entry(root , bg = "black" , fg = "white" , width = 20 , bd = 10 , textvariable = qty3).place(x = x_val , y = 215 )
+        #submit button   
+        Button1 = tk.Button(master, text = "Submit Button", command = lambda:self.Gen())
+        Button1.pack(side = tk.BOTTOM, pady = 10)
 
-#Button to trigger Gen Function
-button = tk.Button(root , text = "Submit" , font = ("Calibri",25) , bg = "black" , fg = "white" ,  command = gen).place(x = 250 , y = 380 )
 
-root.mainloop()
+        #name page
+
+        li1 = {1:['Name',850,250],2:['Phone Number',850,300]}
+
+        for i in li1:
+            lbl = tk.Label(master, text = li1[i][0])
+            lbl.place(x = li1[i][1] , y = li1[i][2]  )
+
+        self.entry1 = tk.Entry(master, textvariable = self.varname)
+        self.entry1.place(x = 950 , y = 250 )
+
+        self.entry2 = tk.Entry(master, textvariable = self.varphone)
+        self.entry2.place(x = 950 , y = 300)
+        
+
+
+    def Add(self,value,key_name):
+        qty = value
+        key = key_name
+        self.store.update({key:qty})
+
+    def Validate(self):
+        self.name = self.varname.get()
+        self.phone = self.varphone.get()
+
+        if self.name.isalpha():
+            if self.phone.isdigit():
+                if len(self.phone) == 10:
+                    return True
+                else:
+                    messagebox.showerror(title = 'Details Entry', message = "Phone Number should be 10 digits only")
+            else:
+                messagebox.showerror(title = 'Details Entry', message = "Phone Number should be number only")        
+        else:
+            messagebox.showerror(title = 'Details Entry', message = "Name should be text only")
+
+
+    def Gen(self):
+        dot = dt.today()
+        
+        bill_db = pd.read_csv('Files/Bill.csv')
+        price_db = pd.read_csv('Files/Items.csv')
+        cust_db = pd.read_csv('Files/Customer-Details.csv')
+
+        size1 = len(bill_db.index)
+        size2 = len(cust_db.index)
+
+        sub_total = 0
+
+
+        for i,(key,value) in enumerate(self.store.items()):
+            if (price_db.loc[(price_db['Items'] == key)]).bool:
+                price = price_db.loc[(price_db['Items'] == key),'Price'].values[0]
+                sub_total += (int(price) * int(value))                
+        
+        
+        if self.Validate():
+            gst = sub_total * 0.05
+            total = sub_total + gst
+
+            try:
+                bill_db.loc[size1] = [dot,(size1+1),sub_total,gst,total]
+                cust_db.loc[size2] = [dot,(size2+1),self.name,self.phone]
+
+                bill_db.to_csv('Files/Bill.csv',index=False)
+                cust_db.to_csv('Files/Customer-Details.csv',index=False)
+
+                messagebox.showinfo(title = 'Details Entry', message = "Entry is made into the database")
+
+
+                self.spinbox1.delete(0, tk.END) 
+                self.spinbox1.insert(0,0)
+
+                self.spinbox2.delete(0, tk.END) 
+                self.spinbox2.insert(0,0)
+
+                self.spinbox3.delete(0, tk.END) 
+                self.spinbox3.insert(0,0)
+
+                self.spinbox4.delete(0, tk.END) 
+                self.spinbox4.insert(0,0)
+
+
+                self.entry1.delete(0,'end')
+                self.entry2.delete(0,'end')
+                
+
+            except Exception as e :
+                messagebox.showerror(title = 'Details Entry', message = "There is an error while making the entry, Try Again")
+                print(e)
+        else:
+            pass
+
+    
+def main():
+    root = tk.Tk()
+    cafe_billing_system = CafeBillingSystem(root)
+    root.mainloop()
+
+main()
+
+
+
+
