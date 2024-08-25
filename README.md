@@ -6,42 +6,42 @@ This Python application is a simple cafe billing system built using the tkinter 
 
 # Usage:
 
-Run the Python script cafe_billing_system.py.
+1. Run the Python script cafe_billing_system.py.
 
-Select items from the menu and specify quantities.
+2. Select items from the menu and specify quantities.
 
-Enter customer details (name and phone number).
+3. Enter customer details (name and phone number).
 
-Click the "Submit" button to generate the bill and save the details to the database.
+4. Click the "Submit" button to generate the bill and save the details to the database.
 
 
 # Features:
 
-User-friendly interface with item selection buttons and quantity spinboxes.
+1. User-friendly interface with item selection buttons and quantity spinboxes.
 
-Validation for customer details entry (name and phone number).
+2. Validation for customer details entry (name and phone number).
 
-Calculation of subtotal, GST, and total amount.
+3. Calculation of subtotal, GST, and total amount.
 
-Database storage of billing and customer details.
+4. Database storage of billing and customer details.
 
 
 # Files:
 
-Items.csv: Contains the menu items and their corresponding prices.
+1. Items.csv: Contains the menu items and their corresponding prices.
 
-Bill.csv: Stores billing details such as date, subtotal, GST, and total amount.
+2 . Bill.csv: Stores billing details such as date, subtotal, GST, and total amount.
 
-Customer-Details.csv: Stores customer details including name, phone number, and date of billing.
+3 . Customer-Details.csv: Stores customer details including name, phone number, and date of billing.
 
 
 # Requirements:
 
-Python 3.x
+ - Python 3.x
 
-tkinter
+ - tkinter
 
-pandas
+ - pandas
 
 # Notes:
 
