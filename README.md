@@ -30,9 +30,9 @@ This Python application is a simple cafe billing system built using the tkinter 
 
 1. Items.csv: Contains the menu items and their corresponding prices.
 
-2 . Bill.csv: Stores billing details such as date, subtotal, GST, and total amount.
+2. Bill.csv: Stores billing details such as date, subtotal, GST, and total amount.
 
-3 . Customer-Details.csv: Stores customer details including name, phone number, and date of billing.
+3. Customer-Details.csv: Stores customer details including name, phone number, and date of billing.
 
 
 # Requirements:
